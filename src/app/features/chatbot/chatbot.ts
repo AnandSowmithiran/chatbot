@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 interface ChatMessage {
@@ -6,6 +7,10 @@ interface ChatMessage {
   content: string;
   isUser: boolean;
   timestamp: Date;
+}
+
+interface ChatApiResponse {
+  response: string;
 }
 
 @Component({
@@ -16,6 +21,7 @@ interface ChatMessage {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatbotComponent {
+  private readonly http = inject(HttpClient);
   protected readonly messages = signal<ChatMessage[]>([
     {
       id: 1,
@@ -44,18 +50,35 @@ export class ChatbotComponent {
     this.currentMessage.set('');
     this.isTyping.set(true);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botMessage: ChatMessage = {
-        id: Date.now() + 1,
-        content: this.generateBotResponse(messageText),
-        isUser: false,
-        timestamp: new Date()
-      };
+    // Send HTTP POST request to the API
+    this.http.post<ChatApiResponse>('http://127.0.0.1:5000/api/chat', {
+      message: messageText
+    }).subscribe({
+      next: (response) => {
+        const botMessage: ChatMessage = {
+          id: Date.now() + 1,
+          content: response.response,
+          isUser: false,
+          timestamp: new Date()
+        };
 
-      this.messages.update(messages => [...messages, botMessage]);
-      this.isTyping.set(false);
-    }, 1000 + Math.random() * 2000);
+        this.messages.update(messages => [...messages, botMessage]);
+        this.isTyping.set(false);
+      },
+      error: (error) => {
+        console.error('Error calling chat API:', error);
+        
+        const errorMessage: ChatMessage = {
+          id: Date.now() + 1,
+          content: "Sorry, I'm having trouble connecting to the server. Please try again later.",
+          isUser: false,
+          timestamp: new Date()
+        };
+
+        this.messages.update(messages => [...messages, errorMessage]);
+        this.isTyping.set(false);
+      }
+    });
   }
 
   onEnterPressed(event: KeyboardEvent): void {
@@ -63,18 +86,5 @@ export class ChatbotComponent {
       event.preventDefault();
       this.sendMessage();
     }
-  }
-
-  private generateBotResponse(userMessage: string): string {
-    const responses = [
-      "That's an interesting question! Let me think about that...",
-      "I understand what you're asking. Here's what I think:",
-      "Thanks for sharing that with me. My perspective is:",
-      "That's a great point! Here's how I see it:",
-      "I appreciate you bringing that up. Consider this:"
-    ];
-
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    return `${randomResponse} You mentioned "${userMessage}". I'm still learning, so please bear with me as I provide the best help I can!`;
   }
 }
