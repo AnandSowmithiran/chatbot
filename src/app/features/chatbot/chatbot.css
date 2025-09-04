@@ -65,6 +65,12 @@
       background-color: #f8f9fa;
       border: 1px solid #e9ecef;
       color: #333;
+      
+      /* Override code block background for bot messages */
+      pre {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+      }
     }
   }
 
@@ -107,6 +113,183 @@
   font-size: 0.95rem;
   line-height: 1.4;
   margin-bottom: 0.25rem;
+  
+  /* Markdown styling */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+  }
+  
+  h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.15rem; }
+  h3 { font-size: 1.05rem; }
+  
+  p {
+    margin: 0.5rem 0;
+  }
+  
+  ul, ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin: 0.25rem 0;
+  }
+  
+  blockquote {
+    border-left: 3px solid #ddd;
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    color: #666;
+    font-style: italic;
+  }
+  
+  /* Inline code styling */
+  .inline-code {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #d63384;
+  }
+  
+  /* Code block styling */
+  pre {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    
+    code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: inherit;
+    }
+  }
+  
+  /* Highlight.js theme - GitHub style */
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+    background: transparent;
+    color: #333;
+  }
+  
+  .hljs-comment,
+  .hljs-quote {
+    color: #998;
+    font-style: italic;
+  }
+  
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+  
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+  
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+  
+  .hljs-subst {
+    font-weight: normal;
+  }
+  
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+  
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+  
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+  
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+  
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+  
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+  
+  .hljs-deletion {
+    background: #fdd;
+  }
+  
+  .hljs-addition {
+    background: #dfd;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  .hljs-strong {
+    font-weight: bold;
+  }
+  
+  /* Strong and emphasis styling for markdown */
+  strong {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  em {
+    font-style: italic;
+    color: #555;
+  }
+  
+  /* Links styling */
+  a {
+    color: #007bff;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .message-time {
