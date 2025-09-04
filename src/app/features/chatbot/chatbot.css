@@ -298,6 +298,19 @@
   text-align: right;
 }
 
+.bot-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  .status-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.25rem;
+  }
+}
+
 .typing-indicator {
   display: flex;
   gap: 0.25rem;
