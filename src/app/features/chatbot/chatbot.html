@@ -51,8 +51,7 @@
         placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
         class="message-input"
         rows="2"
-        [disabled]="isTyping()"
-        ngSkipHydration>
+        [disabled]="isTyping()">
       </textarea>
       <button 
         (click)="sendMessage()"
