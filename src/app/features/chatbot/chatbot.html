@@ -1,0 +1,64 @@
+<div class="chat-container">
+  <header class="chat-header">
+    <h1>AI Chat Assistant</h1>
+    <p>Ask me anything and I'll do my best to help!</p>
+  </header>
+
+  <div class="chat-window">
+    <div class="messages">
+      @for (message of messages(); track message.id) {
+        <div class="message" 
+             [class.user-message]="message.isUser"
+             [class.bot-message]="!message.isUser">
+          <div class="message-avatar">
+            @if (message.isUser) {
+              <span class="user-avatar">👤</span>
+            } @else {
+              <span class="bot-avatar">🤖</span>
+            }
+          </div>
+          <div class="message-content">
+            <div class="message-text">{{ message.content }}</div>
+            <div class="message-time">
+              {{ message.timestamp.toLocaleTimeString() }}
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (isTyping()) {
+        <div class="message bot-message typing">
+          <div class="message-avatar">
+            <span class="bot-avatar">🤖</span>
+          </div>
+          <div class="message-content">
+            <div class="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <div class="input-container">
+      <textarea 
+        [(ngModel)]="currentMessage"
+        (keydown)="onEnterPressed($event)"
+        placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+        class="message-input"
+        rows="2"
+        [disabled]="isTyping()">
+      </textarea>
+      <button 
+        (click)="sendMessage()"
+        class="send-button"
+        [disabled]="!currentMessage().trim() || isTyping()">
+        <span class="send-icon">📤</span>
+      </button>
+    </div>
+  </div>
+</div>

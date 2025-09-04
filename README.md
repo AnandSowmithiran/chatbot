@@ -1,6 +1,26 @@
 # Chatbot
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1 with Angular version target >=20.2.
+
+## How to run
+
+To start the development server, run:
+
+```bash
+npm start
+```
+
+or
+
+```bash
+ng serve
+```
+
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+## Folder layout
+
+The main application code is located in `src/app/` directory.
 
 ## Development server
 
